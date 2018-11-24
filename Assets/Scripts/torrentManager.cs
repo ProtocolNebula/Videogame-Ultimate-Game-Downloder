@@ -31,4 +31,6 @@ public class torrentManager : MonoBehaviour
     {
         Destroy(panel);
     }
+
+    
 }

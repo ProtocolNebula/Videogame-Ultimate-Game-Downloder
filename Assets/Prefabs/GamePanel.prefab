@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 114945206762451422}
   - component: {fileID: 114239931394594748}
   - component: {fileID: 114714928638074382}
+  - component: {fileID: 95720134850231856}
   m_Layer: 5
   m_Name: GamePanel
   m_TagString: Untagged
@@ -203,6 +204,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95720134850231856
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1321144567946022}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5662a4f37c054f748abea105248a3134, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114059279905378934
 MonoBehaviour:
   m_ObjectHideFlags: 1
