@@ -25,9 +25,6 @@ public class GameManager : MonoBehaviour {
     /// game speed altered by virus and antivirus
     /// </summary>
     private float gameSpeed;
-    
-   
-
     #endregion
 
     /// <summary>
@@ -41,11 +38,6 @@ public class GameManager : MonoBehaviour {
         virusController = new VirusController(this);
         popups = new List<Popup>();
         gameSpeed = OriginalGameSpeed;
-
-        virusController.forceNewVirus();
-        virusController.forceNewVirus();
-        virusController.forceNewVirus();
-        virusController.forceNewVirus();
     }
 
     //Awake is always called before any Start functions

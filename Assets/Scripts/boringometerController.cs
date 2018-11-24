@@ -7,6 +7,10 @@ public class boringometerController : MonoBehaviour {
 
     private Image me;
     private float _currentTime;
+
+    /// <summary>
+    /// Total time in seconds
+    /// </summary>
     public float totalTime;
 
 	// Use this for initialization
@@ -16,15 +20,16 @@ public class boringometerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        _currentTime += Time.deltaTime / totalTime;
-
-        me.fillAmount = _currentTime;
-
         if (me.fillAmount >= 1)
         {
             GameManager.instance.EndGame();
         }
-	}
+        else
+        {
+            _currentTime += Time.deltaTime / totalTime;
+            me.fillAmount = _currentTime;
+        }
+    }
 
     public void ReduceFiller(float amount)
     {
