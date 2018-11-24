@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class torrentPanelControl : MonoBehaviour
 {
+    private GameObject desktop;
     private float _currentTime;
     public float totalTime;
 
@@ -15,12 +16,13 @@ public class torrentPanelControl : MonoBehaviour
     public Text progressText;
     public Image progressBar;
     public Button installButton;
+    public GameObject iconPrefab;
 
     // Use this for initialization
     void Start()
     {
         nameText.text = gameName;
-        
+        desktop = GameObject.Find("icon_shortcuts");
     }
 
     // Update is called once per frame
@@ -40,6 +42,8 @@ public class torrentPanelControl : MonoBehaviour
 
     public void install()
     {
-        //algo
+        GameObject newIcon = Instantiate(iconPrefab, desktop.transform);
+        newIcon.transform.GetChild(0).GetComponent<Text>().text = gameName;
+        Destroy(gameObject);
     }
 }
