@@ -173,34 +173,58 @@ public class VirusController {
         switch (virus)
         {
             case 1: // Lag virus
-                Debug.Log("Adding virus lag");
-                totalVirusLag++;
+                this.addVirusTypeLag();
                 break;
 
             case 2: // Paypal hack
-                Debug.Log("Adding paypal hack virus");
-                float moneyRemoved = gameManager.incrementMoney(-50, true);
-                if (moneyRemoved > 0)
-                {
-
-                }
+                this.addVirusTypePaypalHack();
                 break;
 
             case 3: // Multi pop-up
-                Debug.Log("Adding multi popup virus");
-
+                this.addVirusPopup();
                 break;
 
             case 4: // Pop-up troll
-                Debug.Log("Adding popup troll virus");
+                this.addVirusPopupTroll();
                 break;
 
             case 5: // ransomware
-                Debug.Log("Adding ransomeware");
+                this.addVirusRansomeware();
                 break;
         }
 
         updateGameSpeed();
+    }
+    #endregion
+
+    #region "Virus types addition (refactor pending)"
+    private void addVirusTypeLag()
+    {
+        Debug.Log("Adding virus lag");
+        totalVirusLag++;
+    }
+
+
+    private void addVirusTypePaypalHack()
+    {
+        Debug.Log("Adding paypal hack virus");
+        float moneyRemoved = gameManager.incrementMoney(-50, true);
+        if (moneyRemoved > 0)
+        {
+
+        }
+    }
+
+    private void addVirusPopup() {
+        Debug.Log("Adding multi popup virus");
+    }
+
+    private void addVirusPopupTroll() {
+        Debug.Log("Adding popup troll virus");
+    }
+
+    private void addVirusRansomeware() {
+        Debug.Log("Adding ransomeware");
     }
     #endregion
 }
