@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class IconControl : MonoBehaviour, IPointerClickHandler
@@ -21,13 +22,14 @@ public class IconControl : MonoBehaviour, IPointerClickHandler
         if ((lastClick + interval) > Time.time)
         {
             //is a double click
+            GetComponent<Image>().color = new Color32(0, 0, 0, 0);
             Action();
         }
         else
         {
             //is a single click
-            print(1);
-
+            GameManager.instance.UpdateIcons();
+            GetComponent<Image>().color = new Color32(0, 0, 225, 30);
             lastClick = Time.time;
         }
     }

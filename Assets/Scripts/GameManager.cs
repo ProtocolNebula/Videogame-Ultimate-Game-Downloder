@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -90,6 +91,14 @@ public class GameManager : MonoBehaviour {
             // Close task in tasks bar
             GameObject elementTask = tasks[id];
             elementTask.SetActive(false);
+        }
+    }
+
+    public void UpdateIcons()
+    {
+        for (int i = 0; i < icons.Count; i++)
+        {
+            icons[i].GetComponent<Image>().color = new Color(0, 0, 0, 0);
         }
     }
 
