@@ -2506,10 +2506,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icons:
+  - {fileID: 418184440}
+  - {fileID: 256277021}
   - {fileID: 46667184}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1153290228}
   iconPrefab: {fileID: 1618512048746378, guid: d1fb2c1a6f44eaf44aee817b38d5ecb2, type: 2}
   tasks:
   - {fileID: 1836878604}

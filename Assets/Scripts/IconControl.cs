@@ -22,14 +22,17 @@ public class IconControl : MonoBehaviour, IPointerClickHandler
         if ((lastClick + interval) > Time.time)
         {
             //is a double click
-            GetComponent<Image>().color = new Color32(0, 0, 0, 0);
+
+            //GetComponent<Image>().color = new Color32(0, 0, 0, 0);
             Action();
         }
         else
         {
             //is a single click
-            GameManager.instance.UpdateIcons();
-            GetComponent<Image>().color = new Color32(0, 0, 225, 30);
+
+            //GameManager.instance.UpdateIcons();
+            //GetComponent<Image>().color = new Color32(0, 0, 225, 30);
+
             lastClick = Time.time;
         }
     }
