@@ -9,17 +9,22 @@ public class GameManager : MonoBehaviour {
     public List<GameObject> icons;
 
     public GameObject iconPrefab;
-    public GameObject internetTask, torrentTask;
+    public List<GameObject> tasks;
+    public List<GameObject> windows;
 
     public GameObject internetWindow;
+
+    /// <summary>
+    /// Specifiy if a task have window
+    /// TASKID: true/false
+    /// </summary>
+    public List<bool> tasksHaveWindow;
 
     //Awake is always called before any Start functions
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
     }
@@ -30,55 +35,61 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Launch a task at click on icon
+    /// </summary>
+    /// <param name="id">Icon ID (ref to taskID)</param>
     public void IconAction(int id)
     {
-        if (id == 2)
-            if (!internetTask.activeSelf)
+        GameObject element = tasks[id];
+
+        if (!element.activeSelf) {
+            element.SetActive(true);
+            if (tasksHaveWindow[id])
             {
-                internetWindow.GetComponent<Animator>().SetBool("isOpen", true);
-                internetTask.SetActive(true);
+                GameObject elementWindow = windows[id];
+                elementWindow.GetComponent<Animator>().SetBool("isOpen", true);
             }
-                
-        if(id == 3)
-            if (!torrentTask.activeSelf)
-                torrentTask.SetActive(true);
-
-        if (id > 4)
-        {
-
         }
     }
 
+
+    /// <summary>
+    /// Close the window leaving task bar
+    /// </summary>
+    /// <param name="id"></param>
     public void MinimizeWindow(int id)
     {
-        if (id == 0)
-        {
-            Animator window = internetWindow.GetComponent<Animator>();
-            window.SetBool("isOpen", !window.GetBool("isOpen")); 
-        }
+        if (!tasksHaveWindow[id]) return;
+        
+        GameObject element = windows[id];
 
-        if (id == 1)
+        if (element.activeSelf)
         {
-            //Animator window = torrentWindow.GetComponent<Animator>();
-            //window.SetBool("isOpen", !window.GetBool("isOpen"));
+            Animator window = element.GetComponent<Animator>();
+            window.SetBool("isOpen", !window.GetBool("isOpen"));
         }
-
     }
 
+    /// <summary>
+    /// Close the window closing task bar icon
+    /// </summary>
+    /// <param name="id"></param>
     public void CloseWindow(int id)
     {
-        if (id == 0)
-        {
-            Animator window = internetWindow.GetComponent<Animator>();
-            window.SetBool("isOpen", !window.GetBool("isOpen"));
-            internetTask.SetActive(false);
-        }
+        if (!tasksHaveWindow[id]) return;
+        
+        GameObject element = windows[id];
 
-        if (id == 1)
+        if (element.activeSelf)
         {
-            //Animator window = torrentWindow.GetComponent<Animator>();
-            //window.SetBool("isOpen", !window.GetBool("isOpen"));
-            torrentTask.SetActive(false);
+            // Close the windows
+            Animator window = element.GetComponent<Animator>();
+            window.SetBool("isOpen", !window.GetBool("isOpen"));
+
+            // Close task in tasks bar
+            GameObject elementTask = tasks[id];
+            elementTask.SetActive(false);
         }
     }
 

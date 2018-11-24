@@ -151,10 +151,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 46667185}
-  - {fileID: 1153290229}
   - {fileID: 418184441}
   - {fileID: 256277022}
+  - {fileID: 46667185}
+  - {fileID: 1153290229}
   m_Father: {fileID: 1093794358}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 256277024}
   - component: {fileID: 256277023}
   m_Layer: 5
-  m_Name: Icon (3)
+  m_Name: Icon1-Torrent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,7 +252,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 70015636}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c36ebdf31463b41a1204ef59609b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3
+  id: 1
 --- !u!114 &256277024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,6 +761,40 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 411634341}
   m_CullTransparentMesh: 0
+--- !u!1 &414781189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 414781190}
+  m_Layer: 5
+  m_Name: Windows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &414781190
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 414781189}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1605771935}
+  m_Father: {fileID: 1093794358}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &418184440
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +809,7 @@ GameObject:
   - component: {fileID: 418184443}
   - component: {fileID: 418184442}
   m_Layer: 5
-  m_Name: Icon (2)
+  m_Name: Icon0-Internet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -793,7 +827,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 70015636}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -812,7 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c36ebdf31463b41a1204ef59609b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
+  id: 0
 --- !u!114 &418184443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +948,7 @@ Prefab:
     - target: {fileID: 224911821172212890, guid: d1fb2c1a6f44eaf44aee817b38d5ecb2,
         type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224911821172212890, guid: d1fb2c1a6f44eaf44aee817b38d5ecb2,
         type: 2}
@@ -965,6 +999,15 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682352068017934, guid: d1fb2c1a6f44eaf44aee817b38d5ecb2,
+        type: 2}
+      propertyPath: id
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618512048746378, guid: d1fb2c1a6f44eaf44aee817b38d5ecb2, type: 2}
+      propertyPath: m_Name
+      value: Icon2-Trash
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1fb2c1a6f44eaf44aee817b38d5ecb2, type: 2}
@@ -1559,7 +1602,7 @@ RectTransform:
   - {fileID: 319564640}
   - {fileID: 532661896}
   - {fileID: 343386203}
-  - {fileID: 1605771935}
+  - {fileID: 414781190}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1603,7 +1646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 470, y: -60}
+  m_AnchoredPosition: {x: 160, y: -60}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116822187
@@ -1714,7 +1757,7 @@ GameObject:
   - component: {fileID: 1153290231}
   - component: {fileID: 1153290230}
   m_Layer: 5
-  m_Name: Icon (1)
+  m_Name: Icon3-Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1732,7 +1775,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 70015636}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1751,7 +1794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c36ebdf31463b41a1204ef59609b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 3
 --- !u!114 &1153290231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1969,19 +2012,19 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1605771934}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.10552, y: 0.10552, z: 0.10552}
   m_Children:
   - {fileID: 586775336}
   - {fileID: 302586410}
-  m_Father: {fileID: 1093794358}
-  m_RootOrder: 6
+  m_Father: {fileID: 414781190}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -406, y: -741}
-  m_SizeDelta: {x: 0, y: -210}
+  m_SizeDelta: {x: 1820, y: 770}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1605771936
 Animator:
@@ -2468,9 +2511,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   iconPrefab: {fileID: 1618512048746378, guid: d1fb2c1a6f44eaf44aee817b38d5ecb2, type: 2}
-  internetTask: {fileID: 1836878604}
-  torrentTask: {fileID: 1116822185}
+  tasks:
+  - {fileID: 1836878604}
+  - {fileID: 1116822185}
+  windows:
+  - {fileID: 1605771934}
+  - {fileID: 0}
   internetWindow: {fileID: 1605771934}
+  tasksHaveWindow: 01010000
 --- !u!4 &2098552980
 Transform:
   m_ObjectHideFlags: 0
