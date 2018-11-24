@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class VirusController {
 
-#region "Virus settings"
+    #region "Virus settings"
     // Rate (%) to appearing on each download
     public int minRate = 5;
     public int maxRate = 50;
     public int defaultRateIncrease = 5;
-#endregion
 
-#region "Virus system status"
+    /// <summary>
+    /// Minimum game speed (x0.) to decrease speed
+    /// </summary>
+    public float minGameSpeed = 0.4f; // Minimum game speed: 40%
+
+    /// <summary>
+    /// Quantity of speed decreasing for each lag virus
+    /// </summary>
+    public float virusLagDecrease = 0.02f; // Each virus decrease 0.02%
+
+    #endregion
+
+    #region "Virus system status"
+    /// <summary>
+    /// Count with the total of virus that are installed
+    /// </summary>
     private int totalVirus;
+
+    /// <summary>
+    /// Total virus that cause lag
+    /// </summary>
+    private int totalVirusLag;
+
     // Current appearing rate
     private int currentRate;
 
@@ -20,23 +40,33 @@ public class VirusController {
     /// Antivirus life time left, when is greater than 0, will stop all virus
     /// </summary>
     private float antivirusCooldown = 0;
- #endregion
 
- #region "Virus controller"
+    /// <summary>
+    /// Reference to game manager to interact if virus or other
+    /// </summary>
+    private GameManager gameManager;
+    #endregion
+
+    #region "Virus controller
     // Use this for initialization
-    public VirusController () {
+    public VirusController(GameManager gameManager) {
         totalVirus = 0;
+        totalVirusLag = 0;
         currentRate = minRate;
-	}
-	
-	// Update is called once per frame
-	public void FixedUpdate() {
+        this.gameManager = gameManager;
+    }
+
+    /// <summary>
+    /// TODO: If not necessary, remove (and from GameManager)
+    /// </summary>
+    public void FixedUpdate() {
         if (antivirusCooldownTimer()) { return; }
-		
-	}
+
+    }
 
     /// <summary>
     /// Update antivirus cooldown
+    /// TODO: Move to coroutine
     /// </summary>
     /// <returns>True if antivirus is running</returns>
     private bool antivirusCooldownTimer()
@@ -44,7 +74,11 @@ public class VirusController {
         if (antivirusCooldown > 0)
         {
             antivirusCooldown -= Time.deltaTime;
-            if (antivirusCooldown < 0) antivirusCooldown = 0;
+            if (antivirusCooldown <= 0)
+            {
+                antivirusCooldown = 0;
+                updateGameSpeed();
+            }
             return true;
         }
 
@@ -79,13 +113,13 @@ public class VirusController {
     }
 
     /// <summary>
-    /// Will add a new virus and will increase the counter rate
+    /// Generate a new random virus and will increase the counter rate
     /// </summary>
     /// <param name="increaseRate"></param>
     public void forceNewVirus(int addRate = 0)
     {
         if (addRate > 0) increaseRate(addRate);
-        totalVirus++;
+        generateRandomVirus();
     }
 
     /// <summary>
@@ -100,5 +134,73 @@ public class VirusController {
         currentRate += increaseRate;
         if (currentRate > maxRate) { currentRate = maxRate; }
     }
-#endregion
+    #endregion
+
+    #region "Virus generation and speed control"
+
+    /// <summary>
+    /// Calculate and modify the game speed
+    /// </summary>
+    private void updateGameSpeed()
+    {
+        if (antivirusCooldown > 0)
+        {
+            // Anti virus working
+            gameManager.GameSpeed = GameManager.OriginalGameSpeed;
+        }
+        else
+        {
+            // No anti virus working
+            float gameSpeed = GameManager.OriginalGameSpeed - (totalVirusLag * virusLagDecrease);
+
+            // Minimum game speed
+            if (gameSpeed < minGameSpeed) { gameSpeed = minGameSpeed; }
+
+            gameManager.GameSpeed = gameSpeed;
+        }
+        Debug.Log("Updated game speed to: " + gameManager.GameSpeed);
+    }
+
+    /// <summary>
+    /// Generate a new random virus type and increment the total virus
+    /// TODO: Refactor (create a new class for each virus and store in a list with available virus)
+    /// </summary>
+    private void generateRandomVirus()
+    {
+        totalVirus++;
+        int virus = Random.Range(0, 5) + 1;
+
+        switch (virus)
+        {
+            case 1: // Lag virus
+                Debug.Log("Adding virus lag");
+                totalVirusLag++;
+                break;
+
+            case 2: // Paypal hack
+                Debug.Log("Adding paypal hack virus");
+                float moneyRemoved = gameManager.incrementMoney(-50, true);
+                if (moneyRemoved > 0)
+                {
+
+                }
+                break;
+
+            case 3: // Multi pop-up
+                Debug.Log("Adding multi popup virus");
+
+                break;
+
+            case 4: // Pop-up troll
+                Debug.Log("Adding popup troll virus");
+                break;
+
+            case 5: // ransomware
+                Debug.Log("Adding ransomeware");
+                break;
+        }
+
+        updateGameSpeed();
+    }
+    #endregion
 }

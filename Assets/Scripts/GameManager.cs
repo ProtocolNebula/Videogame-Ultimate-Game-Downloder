@@ -18,6 +18,16 @@ public class GameManager : MonoBehaviour {
     private List<Popup> popups;
     public VirusController virusController;
 
+    public const float OriginalGameSpeed = 1;
+    public float money = 10000;
+
+    /// <summary>
+    /// game speed altered by virus and antivirus
+    /// </summary>
+    private float gameSpeed;
+    
+   
+
     #endregion
 
     /// <summary>
@@ -28,10 +38,14 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
-        virusController = new VirusController();
+        virusController = new VirusController(this);
         popups = new List<Popup>();
+        gameSpeed = OriginalGameSpeed;
 
-        virusController.addAntivirus(10);
+        virusController.forceNewVirus();
+        virusController.forceNewVirus();
+        virusController.forceNewVirus();
+        virusController.forceNewVirus();
     }
 
     //Awake is always called before any Start functions
@@ -41,9 +55,6 @@ public class GameManager : MonoBehaviour {
         else if (instance != this) Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-
-        // popups.Add(new Popup("Test"));
-
     }
 
     //Update is called every frame.
@@ -127,4 +138,56 @@ public class GameManager : MonoBehaviour {
     {
 
     }
+
+    #region "Alter player stats"
+    public float GameSpeed
+    {
+        get
+        {
+            return gameSpeed;
+        }
+
+        set
+        {
+            gameSpeed = value;
+        }
+    }
+
+    /// <summary>
+    /// Increase or decrease money
+    /// </summary>
+    /// <param name="quantity">Quantity of amount to add/remove (-quantity)</param>
+    /// <param name="force">If FALSE and have not enough money, will not decreased, if true, will leave to 0</param>
+    /// <returns>Amount incremented/decreased (WITHOUT MINUS SYMBOL)</returns>
+    public float incrementMoney(float quantity, bool force = false)
+    {
+        Debug.Log("Money updating| Modifier: " + quantity + " | Current amount: " + money);
+        // Will be decreased
+        if (quantity < 0)
+        {
+            // Quantity in positive number to modify
+            quantity = -quantity;
+
+            // Not have enough money
+            if (quantity >= money)
+            {
+                if (!force) { return 0; }
+
+                // Force to available amount
+                quantity = money;
+            }
+
+            // Decrease money
+            money -= quantity;
+        }
+        else
+        {
+            money += quantity;
+        }
+
+
+        Debug.Log("Money updated | Modifier: " + quantity + " | New amount: " + money);
+        return quantity;
+    }
+    #endregion
 }
