@@ -5,21 +5,34 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+
     public static GameManager instance = null; //Static instance of GameManager which allows it to be accessed by any other script.
 
+    #region "Main components"
     public List<GameObject> icons;
 
     public GameObject iconPrefab;
     public List<GameObject> tasks;
     public List<GameObject> windows;
 
-    public GameObject internetWindow;
+    private List<Popup> popups;
+    public VirusController virusController;
+
+    #endregion
 
     /// <summary>
     /// Specifiy if a task have window
     /// TASKID: true/false
     /// </summary>
     public List<bool> tasksHaveWindow;
+
+    private void Start()
+    {
+        virusController = new VirusController();
+        popups = new List<Popup>();
+
+        virusController.addAntivirus(10);
+    }
 
     //Awake is always called before any Start functions
     void Awake()
@@ -28,12 +41,20 @@ public class GameManager : MonoBehaviour {
         else if (instance != this) Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        // popups.Add(new Popup("Test"));
+
     }
 
     //Update is called every frame.
     void Update()
     {
 
+    }
+
+    private void FixedUpdate()
+    {
+        virusController.FixedUpdate();
     }
 
     /// <summary>
