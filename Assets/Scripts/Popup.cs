@@ -49,7 +49,7 @@ public class Popup {
 
         if (posY < 0)
         {
-            posY = -Random.Range(-255, 600);
+            posY = -Random.Range(255, 600);
         }
         return this;
     }

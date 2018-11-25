@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour {
     //Update is called every frame.
     void Update()
     {
-        NewPopup(new Popup().randomize());
     }
 
     private void FixedUpdate()
@@ -136,11 +135,20 @@ public class GameManager : MonoBehaviour {
 
         GameObject newPopup = Instantiate(popupPrefab, popupsContainer.transform);
         popups.Add(newPopup);
-        newPopup.GetComponent<PopupWindowController>().applySettings(popup);
+        newPopup.GetComponent<PopupWindowController>().applySettings(popup, this, newPopup);
 
         return true;
     }
 
+    /// <summary>
+    /// Destroy a popup instance (called from PopupWindowController)
+    /// </summary>
+    /// <param name="popup">Popup index</param>
+    public void DestroyPopup(GameObject element)
+    {
+        Destroy(element);
+        popups.Remove(element);
+    }
 
     public void NoticeMe(string notice)
     {

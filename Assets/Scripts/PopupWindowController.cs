@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class PopupWindowController : MonoBehaviour {
 
-    // ID in manager list
-    public int idList;
+    public GameObject self;
     public Image me;
     public Image contentImage;
     private Popup settings;
+    private GameManager gameManager;
 
 	// Use this for initialization
 	void Start () {
@@ -18,9 +18,14 @@ public class PopupWindowController : MonoBehaviour {
     /// <summary>
     /// Apply a set of settings to the popup
     /// </summary>
-    /// <param name="settings"></param>
-    public void applySettings(Popup settings)
+    /// <param name="settings">Settings to apply</param>
+    /// <param name="gameManager">Game Manager instance to destroy elements</param>
+    public void applySettings(Popup settings, GameManager gameManager, GameObject self)
     {
+        this.settings = settings;
+        this.gameManager = gameManager;
+        this.self = self;
+
         //Sprite sprite = Resources.Load<Sprite>("BotonCerrar");
         // Apply the image
         Sprite sprite = settings.imageRef;
@@ -62,10 +67,9 @@ public class PopupWindowController : MonoBehaviour {
     #region "Buttons controllers"
     public void close()
     {
-        Debug.Log("Closing popup " + idList);
         if (settings.closeable)
         {
-            //Destroy(this);
+            gameManager.DestroyPopup(self);
         }
     }
     #endregion
