@@ -105,12 +105,12 @@ public class Popup {
 
         if (isRansomware)
         {
-            GameManager.instance.incrementMoney(-moneyCost);
+            GameManager.instance.incrementMoney(-moneyCost, true);
             GameManager.instance.NoticeMe("Has pagado " + moneyCost + " € para eliminar el Ransomeware y recuperar tus archivos privados.");
         }
         else if (isTroll)
         {
-            GameManager.instance.incrementMoney(-moneyCost);
+            GameManager.instance.incrementMoney(-moneyCost, true);
             GameManager.instance.NoticeMe("Has pagado " + moneyCost + " € para eliminar el Troll Virus");
         }
 
