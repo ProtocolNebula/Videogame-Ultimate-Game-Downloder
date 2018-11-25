@@ -46,7 +46,11 @@ public class internetManager : MonoBehaviour
 
     public void ReloadPanel(GameObject panel)
     {
+        if (GameManager.instance.numTorrents >= 6)
+            return;
+            
         GameManager.instance.NoticeMe("Se ha añadido un juego a torrentGames");
+        GameManager.instance.virusController.newVirus();
 
         panel.GetComponent<Animator>().SetTrigger("del");
         StartCoroutine(WaitThenDoThings(panel));

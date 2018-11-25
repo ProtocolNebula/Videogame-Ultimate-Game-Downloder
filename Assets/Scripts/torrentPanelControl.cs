@@ -42,15 +42,19 @@ public class torrentPanelControl : MonoBehaviour
 
     public void install()
     {
-        GameObject newIcon = Instantiate(iconPrefab, desktop.transform);
-        newIcon.transform.GetChild(0).GetComponent<Text>().text = gameName;
+        if (GameManager.instance.checkFreeSpace())
+        {
+            GameObject newIcon = Instantiate(iconPrefab, desktop.transform);
+            newIcon.transform.GetChild(0).GetComponent<Text>().text = gameName;
 
-        GameManager.instance.NoticeMe("Se ha instalado el juego correctamente");
-        GameManager.instance.incrementGames(1);
+            GameManager.instance.NoticeMe("Se ha instalado el juego correctamente");
+            GameManager.instance.incrementGames(1);
+            GameManager.instance.numTorrents--;
 
-        GetComponent<Animator>().SetTrigger("del");
-        StartCoroutine(WaitThenDoThings());
-        //Destroy(gameObject);
+            GetComponent<Animator>().SetTrigger("del");
+            StartCoroutine(WaitThenDoThings());
+            //Destroy(gameObject);
+        }
     }
 
     IEnumerator WaitThenDoThings()

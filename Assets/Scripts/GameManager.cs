@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
     private List<GameObject> popups;
     public VirusController virusController;
 
+    public int numTorrents;
     public const float OriginalGameSpeed = 1;
     public static float money = 10000;
     public static int games = 0;

@@ -23,8 +23,15 @@ public class torrentManager : MonoBehaviour
 
     public void NewTorrentPanel(string gameName)
     {
+        if (GameManager.instance.numTorrents >= 6)
+        {
+            GameManager.instance.NoticeMe("Máximo de descargas simultaneas alcanzado");
+            return;
+        }
+
         GameObject newGamePanel = Instantiate(torrentPanel, torrentContent);
         newGamePanel.GetComponent<torrentPanelControl>().gameName = gameName;
+        GameManager.instance.numTorrents++;
     }
 
     public void DeleteTorrentPanel(GameObject panel)
