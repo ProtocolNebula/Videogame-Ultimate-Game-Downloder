@@ -146,6 +146,10 @@ public class VirusController {
         {
             generateRandomVirus();
         }
+        else
+        {
+            gameManager.NoticeMe("Virus bloqueado y eliminado.");
+        }
     }
 
     /// <summary>
