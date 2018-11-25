@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 114410959144630882}
   - component: {fileID: 114680140508188272}
   - component: {fileID: 114906392069059366}
+  - component: {fileID: 95083253093869408}
   m_Layer: 5
   m_Name: TorrentPanel
   m_TagString: Untagged
@@ -133,6 +134,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95083253093869408
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1816233666391734}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5662a4f37c054f748abea105248a3134, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114181561765863068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,7 +350,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114344668370204350}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114906392069059366}
+        m_MethodName: install
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114906392069059366
@@ -345,12 +375,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbaa6fe1f8da1e44967df69d07ffb75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 60
+  totalTime: 5
   gameName: 
   nameText: {fileID: 114943657306215780}
   progressText: {fileID: 114464288216262818}
   progressBar: {fileID: 114755050324759866}
   installButton: {fileID: 114793637589658116}
+  iconPrefab: {fileID: 1950922235329072, guid: 1da69c757307c0140b15debe7dae88db, type: 2}
 --- !u!114 &114942810476203406
 MonoBehaviour:
   m_ObjectHideFlags: 1

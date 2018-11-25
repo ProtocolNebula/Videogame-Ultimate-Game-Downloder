@@ -34,8 +34,9 @@ public class gamePanelControl : MonoBehaviour {
         downloadButton.onClick.AddListener(delegate { tM.NewTorrentPanel(gameName); });
         
         internetManager iM = GameObject.Find("Internet_window").GetComponent<internetManager>();
-        downloadButton.onClick.AddListener(iM.NewGamePanel);
 
-        downloadButton.onClick.AddListener(delegate { iM.DeleteGamePanel(gameObject); });
+        //downloadButton.onClick.AddListener(iM.NewGamePanel);
+        //downloadButton.onClick.AddListener(delegate { iM.DeleteGamePanel(gameObject); });
+        downloadButton.onClick.AddListener(delegate { iM.ReloadPanel(gameObject); });
     }
 }

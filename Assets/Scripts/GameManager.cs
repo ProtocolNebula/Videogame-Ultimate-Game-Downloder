@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour {
     private float gameSpeed;
     #endregion
 
+    public GameObject notificationPanel;
+
     /// <summary>
     /// Specifiy if a task have window
     /// TASKID: true/false
@@ -121,6 +123,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+
     /// <summary>
     /// Generate a new popup using popup settings if are available slots
     /// </summary>
@@ -137,6 +140,19 @@ public class GameManager : MonoBehaviour {
         return true;
     }
 
+
+    public void NoticeMe(string notice)
+    {
+        notificationPanel.GetComponent<Animator>().SetBool("isOpen", true);
+        notificationPanel.transform.GetChild(0).GetComponent<Text>().text = notice;
+    }
+
+    public void UnnoticeMe()
+    {
+        notificationPanel.GetComponent<Animator>().SetBool("isOpen", false);
+    }
+
+    //esto no hace nada (de momento ;D)
     public void UpdateIcons()
     {
         for (int i = 0; i < icons.Count; i++)

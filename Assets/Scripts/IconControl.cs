@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class IconControl : MonoBehaviour, IPointerClickHandler
+public class IconControl : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 {
-
     public int id;
+    public GameObject dragIcon;
 
     float lastClick = 0f;
     float interval = 0.4f;
@@ -34,6 +34,16 @@ public class IconControl : MonoBehaviour, IPointerClickHandler
             //GetComponent<Image>().color = new Color32(0, 0, 225, 30);
 
             lastClick = Time.time;
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (id > 3)
+        {
+            GameObject newDragIcon = Instantiate(dragIcon, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.Euler(0,0,0));
+            newDragIcon.GetComponent<DragControl>().IconSprite = GetComponent<Image>().sprite;
+            newDragIcon.GetComponent<DragControl>().IconObject = gameObject;
         }
     }
 }

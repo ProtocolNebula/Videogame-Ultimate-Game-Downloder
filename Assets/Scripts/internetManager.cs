@@ -13,7 +13,7 @@ public class internetManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
             NewGamePanel();
         }
@@ -26,7 +26,7 @@ public class internetManager : MonoBehaviour {
 
     public void TabButtons(GameObject tab)
     {
-        tab.transform.SetAsLastSibling();
+        tab.transform.SetSiblingIndex(1);
     }
 
     public void NewGamePanel()
@@ -39,6 +39,23 @@ public class internetManager : MonoBehaviour {
 
     public void DeleteGamePanel(GameObject panel)
     {
+        Destroy(panel);
+    }
+
+    public void ReloadPanel(GameObject panel)
+    {
+        GameManager.instance.NoticeMe("Se ha añadido un juego a torrentGames");
+
+        panel.GetComponent<Animator>().SetTrigger("del");
+        StartCoroutine(WaitThenDoThings(panel));
+    }
+
+    IEnumerator WaitThenDoThings(GameObject panel)
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        // Now do some stuff...
+        NewGamePanel();
         Destroy(panel);
     }
 }
