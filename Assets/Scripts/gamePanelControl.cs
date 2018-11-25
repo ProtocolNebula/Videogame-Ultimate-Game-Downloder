@@ -13,12 +13,12 @@ public class gamePanelControl : MonoBehaviour {
     [HideInInspector]
     public int price;
     [HideInInspector]
-    public Image image;
+    public Sprite image;
 
     public Text nameText;
     public Text developerText;
     public Text priceText;
-    public Image imagePanel;
+    public Sprite imagePanel;
     public Button downloadButton;
     
 
@@ -26,7 +26,7 @@ public class gamePanelControl : MonoBehaviour {
 	void Start () {
         nameText.text = gameName;
         developerText.text = developer;
-        priceText.text = price + "$";
+        priceText.text = price + " €";
         nameText.text = gameName;
         imagePanel = image;
 

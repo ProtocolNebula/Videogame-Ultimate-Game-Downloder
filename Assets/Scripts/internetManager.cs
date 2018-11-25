@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class internetManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class internetManager : MonoBehaviour
 
     public List<string> gameNames;
     public List<string> developerNames;
+    public List<Sprite> gameImages;
 
     // Use this for initialization
     void Start()
@@ -34,9 +36,11 @@ public class internetManager : MonoBehaviour
     public void NewGamePanel()
     {
         GameObject newGamePanel = Instantiate(gamePanel, gameContent);
-        newGamePanel.GetComponent<gamePanelControl>().gameName = gameNames[Random.Range(0, gameNames.Count - 1)];
+        int gameID = Random.Range(0, gameNames.Count - 1);
+        newGamePanel.GetComponent<gamePanelControl>().gameName = gameNames[gameID] + " " + Random.Range(0, 6);
         newGamePanel.GetComponent<gamePanelControl>().developer = developerNames[Random.Range(0, developerNames.Count - 1)];
-        newGamePanel.GetComponent<gamePanelControl>().price = Random.Range(0, 50);
+        newGamePanel.GetComponent<gamePanelControl>().price = Random.Range(3, 50);
+        newGamePanel.GetComponent<gamePanelControl>().image = gameImages[gameID];
     }
 
     public void DeleteGamePanel(GameObject panel)
