@@ -25,6 +25,7 @@ public class DragControl : MonoBehaviour {
             if (overTrash)
             {
                 Destroy(IconObject);
+                GameManager.instance.currentGames--;
                 GameManager.instance.NoticeMe("Se ha eliminado el juego correctamente");
             }
             Destroy(gameObject);
