@@ -13,27 +13,24 @@ public class GameManager : MonoBehaviour {
     public List<GameObject> icons;
 
     public GameObject iconPrefab;
+    public GameObject popupPrefab;
+    public GameObject popupTrollPrefab;
+    public GameObject popupRansomwarePrefab;
+    public GameObject popupsContainer;
 
     public List<GameObject> tasks;
     public List<GameObject> windows;
 
+    private List<GameObject> popups;
     public VirusController virusController;
 
     public int numTorrents;
     public const float OriginalGameSpeed = 1;
     public static float money = 10000;
-
-    [HideInInspector]
-    public int currentGames = 0;
-
-    // Total installed games in this play
-    [HideInInspector]
     public static int games = 0;
-
-    // Record in all play
     public static int recordGames;
     public static float recordMoney;
-    public int maxGamesInstalled = 20;
+    public int maxPopups = 20;
 
     /// <summary>
     /// game speed altered by virus and antivirus
@@ -50,26 +47,11 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public List<bool> tasksHaveWindow;
 
-    #region "Popup things"
-    public int maxPopups = 20;
-
-    public GameObject popupPrefab;
-    public GameObject popupTrollPrefab;
-    public GameObject popupRansomwarePrefab;
-    public GameObject popupsContainer;
-    public Sprite popupFullDiskImage;
-
-    private List<GameObject> popups;
-    #endregion
-
     private void Start()
     {
         virusController = new VirusController(this);
         popups = new List<GameObject>(maxPopups);
         gameSpeed = OriginalGameSpeed;
-
-        currentGames = 20;
-        checkFreeSpace();
     }
 
     //Awake is always called before any Start functions
@@ -154,9 +136,8 @@ public class GameManager : MonoBehaviour {
     /// Generate a new popup using popup settings if are available slots
     /// </summary>
     /// <param name="popup">Settings to generate the popup</param>
-    /// <param name="force">If true, will add the popup even no space left</param>
     /// <returns>Return true if poup instantiated</returns>
-    public bool NewPopup(Popup popup, bool force = false)
+    public bool NewPopup(Popup popup)
     {
         if (popups.Count > maxPopups) { return false; }
 
@@ -265,27 +246,8 @@ public class GameManager : MonoBehaviour {
         gamesText.text = "x " + games;
     }
 
-
-    /// <summary>
-    /// check if are free space in disk to start a new download
-    /// </summary>
-    /// <param name="showPopup">If true and no space left, a popup will be shown</param>
-    /// <returns></returns>
-    public bool checkFreeSpace(bool showPopup = true)
+    public bool checkFreeSpace()
     {
-        Debug.Log("checking " + currentGames + " - " + maxGamesInstalled);
-        if (currentGames >= maxGamesInstalled)
-        {
-            Debug.Log("out of space");
-            // No space left
-            Popup popup = new Popup().Randomize();
-            popup.posX = 970;
-            popup.posY = -420;
-            //popup.imageRef = Resources.Load<Sprite>("GenericPopup/error_full_disk");
-            popup.imageRef = popupFullDiskImage;
-            NewPopup(popup, true);
-            return false;
-        }
         return true;
     }
 
