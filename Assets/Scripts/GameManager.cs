@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject iconPrefab;
     public GameObject popupPrefab;
+    public GameObject popupPrefabRansomware;
     public GameObject popupsContainer;
 
     public List<GameObject> tasks;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour {
         virusController = new VirusController(this);
         popups = new List<GameObject>(maxPopups);
         gameSpeed = OriginalGameSpeed;
+        virusController.forceNewVirus();
     }
 
     //Awake is always called before any Start functions
@@ -210,7 +212,8 @@ public class GameManager : MonoBehaviour {
                 if (!force) { return 0; }
 
                 // Force to available amount
-                quantity = money;
+                // Currently user can have negative money (debts)
+                //quantity = money;
             }
 
             // Decrease money

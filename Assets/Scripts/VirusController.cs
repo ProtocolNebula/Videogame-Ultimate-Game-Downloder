@@ -113,13 +113,17 @@ public class VirusController {
     }
 
     /// <summary>
-    /// Generate a new random virus and will increase the counter rate
+    /// Generate a new random virus (if no antivirus) and will increase the counter rate
+    /// Rate is increased even anti virus is on
     /// </summary>
     /// <param name="increaseRate"></param>
     public void forceNewVirus(int addRate = 0)
     {
         if (addRate > 0) increaseRate(addRate);
-        generateRandomVirus();
+        if (antivirusCooldown == 0)
+        {
+            generateRandomVirus();
+        }
     }
 
     /// <summary>
@@ -169,27 +173,27 @@ public class VirusController {
     {
         totalVirus++;
         int virus = Random.Range(0, 5) + 1;
-
+        virus = 4;
         switch (virus)
         {
             case 1: // Lag virus
-                this.addVirusTypeLag();
+                addVirusTypeLag();
                 break;
 
             case 2: // Paypal hack
-                this.addVirusTypePaypalHack();
+                addVirusTypePaypalHack();
                 break;
 
             case 3: // Multi pop-up
-                this.addVirusPopup();
+                addVirusPopup();
                 break;
 
             case 4: // Pop-up troll
-                this.addVirusPopupTroll();
+                addVirusPopupTroll();
                 break;
 
             case 5: // ransomware
-                this.addVirusRansomeware();
+                addVirusRansomeware();
                 break;
         }
 
@@ -217,17 +221,25 @@ public class VirusController {
 
     private void addVirusPopup() {
         Debug.Log("Adding multi popup virus");
-        Popup popup = new Popup().randomize();
-
+        Popup popup = new Popup().Randomize();
         gameManager.NewPopup(popup);
     }
 
     private void addVirusPopupTroll() {
         Debug.Log("Adding popup troll virus");
+        Popup popup = new Popup();
+        popup.closeable = false;
+        popup.isTroll = true;
+        popup.Randomize();
+        gameManager.NewPopup(popup);
     }
 
     private void addVirusRansomeware() {
         Debug.Log("Adding ransomeware");
+        Popup popup = new Popup();
+        popup.closeable = false;
+        popup.isRansomware = true;
+        popup.Randomize();
     }
     #endregion
 }

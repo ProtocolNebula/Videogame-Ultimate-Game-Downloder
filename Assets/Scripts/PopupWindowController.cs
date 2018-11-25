@@ -8,7 +8,7 @@ public class PopupWindowController : MonoBehaviour {
     public GameObject self;
     public Image me;
     public Image contentImage;
-    private Popup settings;
+    private Popup popupSettings;
     private GameManager gameManager;
 
 	// Use this for initialization
@@ -16,20 +16,27 @@ public class PopupWindowController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Apply a set of settings to the popup
+    /// Apply a set of popupSettings to the popup
     /// </summary>
-    /// <param name="settings">Settings to apply</param>
+    /// <param name="popupSettings">Settings to apply</param>
     /// <param name="gameManager">Game Manager instance to destroy elements</param>
-    public void applySettings(Popup settings, GameManager gameManager, GameObject self)
+    public void applySettings(Popup popupSettings, GameManager gameManager, GameObject self)
     {
-        this.settings = settings;
+        this.popupSettings = popupSettings;
         this.gameManager = gameManager;
         this.self = self;
+        refreshSettings();
+    }
 
+    /// <summary>
+    /// Will refresh popup with the popupSettings loaded/changed
+    /// </summary>
+    private void refreshSettings()
+    {
         //Sprite sprite = Resources.Load<Sprite>("BotonCerrar");
         // Apply the image
-        Sprite sprite = settings.imageRef;
-        contentImage.sprite = settings.imageRef;
+        Sprite sprite = popupSettings.imageRef;
+        contentImage.sprite = popupSettings.imageRef;
 
         // Calculate the new content size
         float newWidth = sprite.textureRect.size.x + contentHorizontalMargin();
@@ -37,8 +44,9 @@ public class PopupWindowController : MonoBehaviour {
         me.rectTransform.sizeDelta = new Vector2(newWidth, newHeight);
 
         // Set window position
-        //me.rectTransform.position = new Vector3(settings.posX, settings.posY);
-        me.transform.localPosition = new Vector3(settings.posX, settings.posY);
+        //me.rectTransform.position = new Vector3(popupSettings.posX, popupSettings.posY);
+        me.transform.localPosition = new Vector3(popupSettings.posX, popupSettings.posY);
+
     }
 
     /// <summary>
@@ -67,9 +75,14 @@ public class PopupWindowController : MonoBehaviour {
     #region "Buttons controllers"
     public void close()
     {
-        if (settings.closeable)
+        Debug.Log("Closing force");
+        if (popupSettings.Close())
         {
             gameManager.DestroyPopup(self);
+        }
+        else
+        {
+            refreshSettings();
         }
     }
     #endregion
