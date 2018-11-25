@@ -74,9 +74,6 @@ public class GameManager : MonoBehaviour {
         gameSpeed = OriginalGameSpeed;
 
         audioManager = gameObject.AddComponent<AudioSource>();
-
-        currentGames = 34;
-        checkFreeSpace();
     }
 
     //Awake is always called before any Start functions
