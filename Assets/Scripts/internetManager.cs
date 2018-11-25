@@ -37,7 +37,7 @@ public class internetManager : MonoBehaviour
     {
         GameObject newGamePanel = Instantiate(gamePanel, gameContent);
         int gameID = Random.Range(0, gameNames.Count - 1);
-        newGamePanel.GetComponent<gamePanelControl>().gameName = gameNames[gameID] + " " + Random.Range(0, 6);
+        newGamePanel.GetComponent<gamePanelControl>().gameName = gameNames[gameID] + " " + Random.Range(1, 7);
         newGamePanel.GetComponent<gamePanelControl>().developer = developerNames[Random.Range(0, developerNames.Count - 1)];
         newGamePanel.GetComponent<gamePanelControl>().price = Random.Range(3, 50);
         newGamePanel.GetComponent<gamePanelControl>().image = gameImages[gameID];

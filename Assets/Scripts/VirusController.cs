@@ -245,7 +245,7 @@ public class VirusController {
     private void addVirusTypePaypalHack()
     {
         Debug.Log("Adding paypal hack virus");
-        float moneyRemoved = gameManager.incrementMoney(Random.Range(30, 60), true);
+        float moneyRemoved = gameManager.incrementMoney(-Random.Range(30, 60), true);
         GameManager.instance.NoticeMe("Transferidos "+ moneyRemoved.ToString() + "€ a YOUHAVEBEENHACKED correctamente.");
     }
 

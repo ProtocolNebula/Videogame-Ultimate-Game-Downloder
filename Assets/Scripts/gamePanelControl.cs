@@ -18,7 +18,7 @@ public class gamePanelControl : MonoBehaviour {
     public Text nameText;
     public Text developerText;
     public Text priceText;
-    public Sprite imagePanel;
+    public Image imagePanel;
     public Button downloadButton;
     
 
@@ -28,7 +28,7 @@ public class gamePanelControl : MonoBehaviour {
         developerText.text = developer;
         priceText.text = price + " €";
         nameText.text = gameName;
-        imagePanel = image;
+        imagePanel.sprite = image;
 
         torrentManager tM = GameObject.Find("torrent_window").GetComponent<torrentManager>();
         downloadButton.onClick.AddListener(delegate { tM.NewTorrentPanel(gameName); });
