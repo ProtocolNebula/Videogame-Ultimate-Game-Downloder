@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
     public int numTorrents;
     public const float OriginalGameSpeed = 1;
     public static float money = 10000;
+    public Text moneyContainer;
 
     [HideInInspector]
     public int currentGames = 0;
@@ -67,9 +68,6 @@ public class GameManager : MonoBehaviour {
         virusController = new VirusController(this);
         popups = new List<GameObject>(maxPopups);
         gameSpeed = OriginalGameSpeed;
-
-        currentGames = 20;
-        checkFreeSpace();
     }
 
     //Awake is always called before any Start functions
@@ -254,9 +252,14 @@ public class GameManager : MonoBehaviour {
             money += quantity;
         }
 
-
+        updateMoneyText();
         Debug.Log("Money updated | Modifier: " + quantity + " | New amount: " + money);
         return quantity;
+    }
+
+    public void updateMoneyText()
+    {
+        moneyContainer.text = money.ToString() + " €";
     }
 
     public void incrementGames(int quantity)
