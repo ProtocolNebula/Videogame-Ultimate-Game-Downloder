@@ -245,5 +245,10 @@ public class GameManager : MonoBehaviour {
         gamesText.text = "x " + games;
     }
 
+    public bool checkFreeSpace()
+    {
+        return true;
+    }
+
     #endregion
 }
