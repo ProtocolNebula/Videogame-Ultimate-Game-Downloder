@@ -81,6 +81,26 @@ public class GameManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// Purchase antivirus (even if player have no money)
+    /// If antivirus is already in computer, user can't purcahse it
+    /// </summary>
+    /// <param name="price">Antivirus cost</param>
+    /// <param name="time">Duration time</param>
+    /// <returns></returns>
+    public void BuyAntivirus(float price, float time)
+    {
+        if (!virusController.areAntivirusRunning())
+        {
+            incrementMoney(-price, true);
+            virusController.addAntivirus(time);
+            NoticeMe("Antivirus: " + time + " segundos por " + price + " €");
+            return;
+        }
+
+        NoticeMe("Ya hay un antivirus activo.");
+    }
+
+    /// <summary>
     /// Launch a task at click on icon
     /// </summary>
     /// <param name="id">Icon ID (ref to taskID)</param>
@@ -132,7 +152,7 @@ public class GameManager : MonoBehaviour {
             Animator window = element.GetComponent<Animator>();
             window.SetBool("isOpen", !window.GetBool("isOpen"));
 
-            // Close task in tasks bar
+            // Close task in tasks barg
             GameObject elementTask = tasks[id];
             elementTask.SetActive(false);
         }

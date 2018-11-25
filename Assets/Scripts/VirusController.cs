@@ -99,7 +99,6 @@ public class VirusController {
             }
             return true;
         }
-
         return false;
     }
 
@@ -110,6 +109,12 @@ public class VirusController {
     public void addAntivirus(float time)
     {
         antivirusCooldown += time;
+        Debug.Log("Antivirus added for " + antivirusCooldown);
+    }
+
+    public bool areAntivirusRunning()
+    {
+        return antivirusCooldown > 0;
     }
 
     /// <summary>
@@ -142,7 +147,7 @@ public class VirusController {
     public void forceNewVirus(int addRate = 0)
     {
         if (addRate > 0) increaseRate(addRate);
-        if (antivirusCooldown == 0)
+        if (!areAntivirusRunning())
         {
             generateRandomVirus();
         }
@@ -173,7 +178,7 @@ public class VirusController {
     /// </summary>
     private void updateGameSpeed()
     {
-        if (antivirusCooldown > 0)
+        if (areAntivirusRunning())
         {
             // Anti virus working
             gameManager.GameSpeed = GameManager.OriginalGameSpeed;
@@ -239,9 +244,8 @@ public class VirusController {
     private void addVirusTypePaypalHack()
     {
         Debug.Log("Adding paypal hack virus");
-        float randomMoney = Random.RandomRange(30, 60);
-        float moneyRemoved = gameManager.incrementMoney(-randomMoney, true);
-        GameManager.instance.NoticeMe("Transferidos "+ randomMoney + "€ a YOUHAVEBEENHACKED correctamente.");
+        float moneyRemoved = gameManager.incrementMoney(Random.Range(30, 60), true);
+        GameManager.instance.NoticeMe("Transferidos "+ moneyRemoved.ToString() + "€ a YOUHAVEBEENHACKED correctamente.");
     }
 
     private void addVirusPopup() {
