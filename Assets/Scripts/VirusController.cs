@@ -45,6 +45,12 @@ public class VirusController {
     /// Reference to game manager to interact if virus or other
     /// </summary>
     private GameManager gameManager;
+
+    // Queue of popups to instantiate if multi virus started
+    private int popupLeft = 0;
+
+    // If multiple virus in queue
+    private float nextPopupIn = 0;
     #endregion
 
     #region "Virus controller
@@ -62,6 +68,18 @@ public class VirusController {
     public void FixedUpdate() {
         if (antivirusCooldownTimer()) { return; }
 
+        // Next popup instances
+        if (popupLeft > 0)
+        {
+            nextPopupIn -= Time.fixedDeltaTime;
+            if (nextPopupIn < 0)
+            {
+                Popup popup = new Popup().Randomize();
+                if (gameManager.NewPopup(popup)) { prepareNextPopup(); }
+                // Can't open more popups
+                else { popupLeft = 0; }
+            }
+        }
     }
 
     /// <summary>
@@ -173,7 +191,7 @@ public class VirusController {
     {
         totalVirus++;
         int virus = Random.Range(0, 5) + 1;
-        virus = 4;
+        virus = 5;
         switch (virus)
         {
             case 1: // Lag virus
@@ -212,17 +230,24 @@ public class VirusController {
     private void addVirusTypePaypalHack()
     {
         Debug.Log("Adding paypal hack virus");
-        float moneyRemoved = gameManager.incrementMoney(-50, true);
-        if (moneyRemoved > 0)
-        {
-
-        }
+        float randomMoney = Random.RandomRange(30, 60);
+        float moneyRemoved = gameManager.incrementMoney(-randomMoney, true);
+        GameManager.instance.NoticeMe("Transferidos "+ randomMoney + "€ a YOUHAVEBEENHACKED correctamente.");
     }
 
     private void addVirusPopup() {
         Debug.Log("Adding multi popup virus");
-        Popup popup = new Popup().Randomize();
-        gameManager.NewPopup(popup);
+
+        popupLeft = Random.Range(5, 10);
+    }
+
+    private void prepareNextPopup()
+    {
+        if (popupLeft > 0)
+        {
+            nextPopupIn = Random.Range(0.2f, 0.7f);
+            popupLeft--;
+        }
     }
 
     private void addVirusPopupTroll() {
@@ -240,6 +265,7 @@ public class VirusController {
         popup.closeable = false;
         popup.isRansomware = true;
         popup.Randomize();
+        gameManager.NewPopup(popup);
     }
     #endregion
 }

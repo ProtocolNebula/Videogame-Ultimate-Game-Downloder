@@ -13,17 +13,17 @@ public class PopupWindowController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        gameManager = GameManager.instance;
     }
 
     /// <summary>
     /// Apply a set of popupSettings to the popup
     /// </summary>
     /// <param name="popupSettings">Settings to apply</param>
-    /// <param name="gameManager">Game Manager instance to destroy elements</param>
-    public void applySettings(Popup popupSettings, GameManager gameManager, GameObject self)
+    /// <param name="self">instantiated object instance</param>
+    public void applySettings(Popup popupSettings, GameObject self)
     {
         this.popupSettings = popupSettings;
-        this.gameManager = gameManager;
         this.self = self;
         refreshSettings();
     }
@@ -77,6 +77,19 @@ public class PopupWindowController : MonoBehaviour {
     {
         Debug.Log("Closing force");
         if (popupSettings.Close())
+        {
+            gameManager.DestroyPopup(self);
+        }
+        else
+        {
+            refreshSettings();
+        }
+    }
+
+    public void OkButton()
+    {
+        Debug.Log("Accepting popup");
+        if (popupSettings.OkButton() && popupSettings.Close())
         {
             gameManager.DestroyPopup(self);
         }
