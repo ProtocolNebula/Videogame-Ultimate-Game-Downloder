@@ -95,6 +95,7 @@ public class VirusController {
             if (antivirusCooldown <= 0)
             {
                 antivirusCooldown = 0;
+                gameManager.NoticeMe("El anti virus ha caducado.");
                 updateGameSpeed();
             }
             return true;
