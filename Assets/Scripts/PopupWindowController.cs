@@ -5,16 +5,14 @@ using UnityEngine.UI;
 
 public class PopupWindowController : MonoBehaviour {
 
+    // ID in manager list
+    public int idList;
     public Image me;
     public Image contentImage;
     private Popup settings;
-    //private int id = 0;
 
-    private static int numeric = 0;
-    
 	// Use this for initialization
 	void Start () {
-
     }
 
     /// <summary>
@@ -34,7 +32,8 @@ public class PopupWindowController : MonoBehaviour {
         me.rectTransform.sizeDelta = new Vector2(newWidth, newHeight);
 
         // Set window position
-        me.rectTransform.position = new Vector3(settings.posX, settings.posY);
+        //me.rectTransform.position = new Vector3(settings.posX, settings.posY);
+        me.transform.localPosition = new Vector3(settings.posX, settings.posY);
     }
 
     /// <summary>
@@ -63,7 +62,7 @@ public class PopupWindowController : MonoBehaviour {
     #region "Buttons controllers"
     public void close()
     {
-        Debug.Log("Closing popup");
+        Debug.Log("Closing popup " + idList);
         if (settings.closeable)
         {
             //Destroy(this);

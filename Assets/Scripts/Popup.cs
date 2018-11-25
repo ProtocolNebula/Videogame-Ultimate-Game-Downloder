@@ -35,6 +35,8 @@ public class Popup {
     /// <returns></returns>
     public Popup randomize()
     {
+        // TODO: Calculate positions in function of parent
+        // TODO: Apply image positions to avoid overflow image
         if (!imageRef)
         {
             imageRef = sprites[Random.Range(0, sprites.Length)];
@@ -42,12 +44,12 @@ public class Popup {
 
         if (posX < 0)
         {
-            posX = Random.Range(200, 1500);
+            posX = Random.Range(200, 1590);
         }
 
         if (posY < 0)
         {
-            posY = Random.Range(200, 900);
+            posY = -Random.Range(-255, 600);
         }
         return this;
     }

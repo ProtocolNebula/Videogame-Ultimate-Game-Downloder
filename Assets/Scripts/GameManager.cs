@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour {
     //Update is called every frame.
     void Update()
     {
+        NewPopup(new Popup().randomize());
     }
 
     private void FixedUpdate()
