@@ -34,9 +34,10 @@ public class torrentPanelControl : MonoBehaviour
 
         progressText.text = (int)(progressBar.fillAmount * 100) + "%";
 
-        if (progressBar.fillAmount >= 1)
+        if (!installButton.interactable && progressBar.fillAmount >= 1)
         {
             installButton.interactable = true;
+            GameManager.instance.NoticeMe(gameName + " se ha descargado correctamente.");
         }
     }
 

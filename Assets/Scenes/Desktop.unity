@@ -146,7 +146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000030003488, y: 0.0011138916}
+  m_AnchoredPosition: {x: 0.000030003488, y: 0.00093078613}
   m_SizeDelta: {x: 1871.8, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &23445355
@@ -6732,6 +6732,130 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1976153441}
   m_CullTransparentMesh: 0
+--- !u!1 &1992799073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1992799075}
+  - component: {fileID: 1992799074}
+  m_Layer: 0
+  m_Name: sonidofondo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1992799074
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1992799073}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9fc2cb9df1f63624bb14642d4d3c2baa, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1992799075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1992799073}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2019515204
 GameObject:
   m_ObjectHideFlags: 0
@@ -7126,13 +7250,6 @@ MonoBehaviour:
   - {fileID: 46667184}
   - {fileID: 1153290228}
   iconPrefab: {fileID: 1950922235329072, guid: 1da69c757307c0140b15debe7dae88db, type: 2}
-  popupPrefab: {fileID: 1351949683521046, guid: 91b03cf89706573468c587741e380f00,
-    type: 2}
-  popupTrollPrefab: {fileID: 1813199058366030, guid: dd6982bc5ea35fa46a4fe4365278b08f,
-    type: 2}
-  popupRansomwarePrefab: {fileID: 1047662708203556, guid: 9260c3545cd0f2e44b11c65a278d01be,
-    type: 2}
-  popupsContainer: {fileID: 1941334348}
   tasks:
   - {fileID: 1836878604}
   - {fileID: 1116822185}
@@ -7142,7 +7259,20 @@ MonoBehaviour:
   numTorrents: 0
   moneyContainer: {fileID: 908302420}
   currentGames: 0
+  maxInstalledGames: 20
+  popupPrefab: {fileID: 1351949683521046, guid: 91b03cf89706573468c587741e380f00,
+    type: 2}
+  popupTrollPrefab: {fileID: 1813199058366030, guid: dd6982bc5ea35fa46a4fe4365278b08f,
+    type: 2}
+  popupRansomwarePrefab: {fileID: 1047662708203556, guid: 9260c3545cd0f2e44b11c65a278d01be,
+    type: 2}
+  popupsContainer: {fileID: 1941334348}
+  popupError: {fileID: 21300000, guid: ffe30dd4c0b4a2c47befd6c9cb9b280c, type: 3}
   maxPopups: 20
+  audioClick: {fileID: 8300000, guid: 5c009c2b2499f0549bc34d27249daf76, type: 3}
+  audioNotification: {fileID: 8300000, guid: 1625b2d25e8eece44a6dbcb0b074e762, type: 3}
+  audioError: {fileID: 8300000, guid: 71ab50cd4d6c1d1469ef4f484d65b946, type: 3}
+  audioPopup: {fileID: 8300000, guid: 1784c1734133acf4cb473b6f6a25f1a1, type: 3}
   notificationPanel: {fileID: 1245903240}
   gamesText: {fileID: 701860753}
   tasksHaveWindow: 01010000

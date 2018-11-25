@@ -13,6 +13,11 @@ public class Popup {
     public bool closeable = true;
 
     /// <summary>
+    /// If is an "system error" will reproduce different sound
+    /// </summary>
+    public bool isError = false;
+
+    /// <summary>
     /// If is troll, will appear randomly on try to close (if !closeable)
     /// TODO: Refactor this to another class
     /// </summary>
