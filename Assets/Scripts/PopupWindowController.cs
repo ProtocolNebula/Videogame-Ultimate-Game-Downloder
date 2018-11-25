@@ -75,7 +75,6 @@ public class PopupWindowController : MonoBehaviour {
     #region "Buttons controllers"
     public void close()
     {
-        Debug.Log("Closing force");
         if (popupSettings.Close())
         {
             gameManager.DestroyPopup(self);
@@ -88,7 +87,6 @@ public class PopupWindowController : MonoBehaviour {
 
     public void OkButton()
     {
-        Debug.Log("Accepting popup");
         if (popupSettings.OkButton() && popupSettings.Close())
         {
             gameManager.DestroyPopup(self);

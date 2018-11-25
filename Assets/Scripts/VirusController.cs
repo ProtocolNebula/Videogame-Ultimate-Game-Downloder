@@ -195,7 +195,7 @@ public class VirusController {
     {
         totalVirus++;
         int virus = Random.Range(0, 5) + 1;
-        virus = 5;
+
         switch (virus)
         {
             case 1: // Lag virus
