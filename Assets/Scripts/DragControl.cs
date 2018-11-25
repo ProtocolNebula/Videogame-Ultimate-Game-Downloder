@@ -20,8 +20,6 @@ public class DragControl : MonoBehaviour {
         screenPoint.z = 10.0f; //distance of the plane from the camera
         transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
 
-        Debug.Log(transform.localScale);
-
         if (Input.GetMouseButtonUp(0))
         {
             if (overTrash)

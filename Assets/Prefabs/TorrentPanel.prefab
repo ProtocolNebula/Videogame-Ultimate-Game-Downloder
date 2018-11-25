@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbaa6fe1f8da1e44967df69d07ffb75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 5
+  totalTime: 20
   gameName: 
   nameText: {fileID: 114943657306215780}
   progressText: {fileID: 114464288216262818}

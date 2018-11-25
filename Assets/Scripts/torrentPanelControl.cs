@@ -46,6 +46,7 @@ public class torrentPanelControl : MonoBehaviour
         newIcon.transform.GetChild(0).GetComponent<Text>().text = gameName;
 
         GameManager.instance.NoticeMe("Se ha instalado el juego correctamente");
+        GameManager.instance.incrementGames(1);
 
         GetComponent<Animator>().SetTrigger("del");
         StartCoroutine(WaitThenDoThings());

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
@@ -23,7 +24,10 @@ public class GameManager : MonoBehaviour {
     public VirusController virusController;
 
     public const float OriginalGameSpeed = 1;
-    public float money = 10000;
+    public static float money = 10000;
+    public static int games = 0;
+    public static int recordGames;
+    public static float recordMoney;
     public int maxPopups = 20;
 
     /// <summary>
@@ -33,6 +37,7 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     public GameObject notificationPanel;
+    public Text gamesText;
 
     /// <summary>
     /// Specifiy if a task have window
@@ -174,7 +179,7 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame()
     {
-
+        SceneManager.LoadScene(2);
     }
 
     #region "Alter player stats"
@@ -228,5 +233,12 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Money updated | Modifier: " + quantity + " | New amount: " + money);
         return quantity;
     }
+
+    public void incrementGames(int quantity)
+    {
+        games += quantity;
+        gamesText.text = "x " + games;
+    }
+
     #endregion
 }

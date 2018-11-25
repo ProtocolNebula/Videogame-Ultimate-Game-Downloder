@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class internetManager : MonoBehaviour {
-
+public class internetManager : MonoBehaviour
+{
     public GameObject gamePanel;
 
     public Transform gameContent;
@@ -11,18 +11,20 @@ public class internetManager : MonoBehaviour {
     public List<string> gameNames;
     public List<string> developerNames;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         for (int i = 0; i < 5; i++)
         {
             NewGamePanel();
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void TabButtons(GameObject tab)
     {
