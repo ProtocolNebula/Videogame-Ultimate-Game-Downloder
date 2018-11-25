@@ -19,10 +19,11 @@ public class Popup {
     public bool isTroll = false;
 
     /// <summary>
-    /// Similar to isTroll, but expensive and with other images
+    /// Similar to isTroll, but with other images
     /// TODO: Refactor this to another class
     /// </summary>
     public bool isRansomware = false;
+    public float moneyCost = 0;
     public float posX = -1;
     public float posY = -1;
     #endregion
@@ -37,7 +38,7 @@ public class Popup {
     /// </summary>
     static private Sprite[] sprites = Resources.LoadAll<Sprite>("Ads");
     static private Sprite[] spritesTroll = Resources.LoadAll<Sprite>("AdsTroll");
-    static private Sprite[] spritesRansomware = Resources.LoadAll<Sprite>("AdsRansomware");
+    static private Sprite[] spritesRansomware = Resources.LoadAll<Sprite>("AdsRansomeware");
 
     public Popup()
     {
@@ -60,8 +61,17 @@ public class Popup {
 
         // TODO: Apply image positions to avoid overflow image
         // TODO: Calculate positions in function of parent
-        posX = Random.Range(200, 1590);
-        posY = -Random.Range(255, 600);
+        if (!isRansomware)
+        {
+            posX = Random.Range(200, 1590);
+            posY = -Random.Range(255, 600);
+        }
+        else
+        {
+            posX = 970;
+            posY = -420;
+        }
+        
 
         return this;
     }
@@ -78,5 +88,30 @@ public class Popup {
         }
 
         return closeable;
+    }
+
+    public bool OkButton()
+    {
+        if (moneyCost == 0)
+        {
+            if (isRansomware) { moneyCost = 100; }
+            else if (isTroll) { moneyCost = 50; }
+        }
+
+        if (isRansomware)
+        {
+            GameManager.instance.incrementMoney(-moneyCost);
+            GameManager.instance.NoticeMe("Has pagado " + moneyCost + " € para eliminar el Ransomeware y recuperar tus archivos privados.");
+        }
+        else if (isTroll)
+        {
+            GameManager.instance.incrementMoney(-moneyCost);
+            GameManager.instance.NoticeMe("Has pagado " + moneyCost + " € para eliminar el Troll Virus");
+        }
+
+        // Now can be closed
+        closeable = true;
+
+        return true;
     }
 }

@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour {
 
     public GameObject iconPrefab;
     public GameObject popupPrefab;
-    public GameObject popupPrefabRansomware;
+    public GameObject popupTrollPrefab;
+    public GameObject popupRansomwarePrefab;
     public GameObject popupsContainer;
 
     public List<GameObject> tasks;
@@ -135,9 +136,14 @@ public class GameManager : MonoBehaviour {
     {
         if (popups.Count > maxPopups) { return false; }
 
-        GameObject newPopup = Instantiate(popupPrefab, popupsContainer.transform);
+        GameObject prefabToUse;
+        if (popup.isRansomware) { prefabToUse = popupRansomwarePrefab; }
+        else if (popup.isTroll) { prefabToUse = popupTrollPrefab; }
+        else { prefabToUse = popupPrefab; }
+
+        GameObject newPopup = Instantiate(prefabToUse, popupsContainer.transform);
         popups.Add(newPopup);
-        newPopup.GetComponent<PopupWindowController>().applySettings(popup, this, newPopup);
+        newPopup.GetComponent<PopupWindowController>().applySettings(popup, newPopup);
 
         return true;
     }
