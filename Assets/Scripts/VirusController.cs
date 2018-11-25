@@ -7,7 +7,7 @@ public class VirusController {
     #region "Virus settings"
     // Rate (%) to appearing on each download
     public int minRate = 5;
-    public int maxRate = 50;
+    public int maxRate = 80;
     public int defaultRateIncrease = 5;
 
     /// <summary>
@@ -118,13 +118,17 @@ public class VirusController {
     /// <returns>True if virus is added</returns>
     public bool newVirus()
     {
-        int random = Random.Range(0, 100);
-        increaseRate(defaultRateIncrease);
+        int random = Random.Range(0, 100);        
 
         if (random <= currentRate)
         {
             forceNewVirus(0);
             return true;
+        }
+        else
+        {
+            // Only increase range if no virus draw
+            increaseRate(defaultRateIncrease);
         }
 
         return true;
@@ -195,7 +199,8 @@ public class VirusController {
         switch (virus)
         {
             case 1: // Lag virus
-                addVirusTypeLag();
+                //addVirusTypeLag();
+                addVirusPopup();
                 break;
 
             case 2: // Paypal hack

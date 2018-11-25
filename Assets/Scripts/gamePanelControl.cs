@@ -39,4 +39,10 @@ public class gamePanelControl : MonoBehaviour {
         //downloadButton.onClick.AddListener(delegate { iM.DeleteGamePanel(gameObject); });
         downloadButton.onClick.AddListener(delegate { iM.ReloadPanel(gameObject); });
     }
+
+    public void FakeDownloadButton()
+    {
+        Popup popup = new Popup().Randomize();
+        GameManager.instance.NewPopup(popup);
+    }
 }
