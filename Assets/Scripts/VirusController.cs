@@ -217,6 +217,9 @@ public class VirusController {
 
     private void addVirusPopup() {
         Debug.Log("Adding multi popup virus");
+        Popup popup = new Popup().randomize();
+
+        gameManager.NewPopup(popup);
     }
 
     private void addVirusPopupTroll() {

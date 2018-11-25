@@ -12,14 +12,18 @@ public class GameManager : MonoBehaviour {
     public List<GameObject> icons;
 
     public GameObject iconPrefab;
+    public GameObject popupPrefab;
+    public GameObject popupsContainer;
+
     public List<GameObject> tasks;
     public List<GameObject> windows;
 
-    private List<Popup> popups;
+    private List<GameObject> popups;
     public VirusController virusController;
 
     public const float OriginalGameSpeed = 1;
     public float money = 10000;
+    public int maxPopups = 20;
 
     /// <summary>
     /// game speed altered by virus and antivirus
@@ -36,7 +40,7 @@ public class GameManager : MonoBehaviour {
     private void Start()
     {
         virusController = new VirusController(this);
-        popups = new List<Popup>();
+        popups = new List<GameObject>(maxPopups);
         gameSpeed = OriginalGameSpeed;
     }
 
@@ -52,7 +56,6 @@ public class GameManager : MonoBehaviour {
     //Update is called every frame.
     void Update()
     {
-
     }
 
     private void FixedUpdate()
@@ -116,6 +119,22 @@ public class GameManager : MonoBehaviour {
             GameObject elementTask = tasks[id];
             elementTask.SetActive(false);
         }
+    }
+
+    /// <summary>
+    /// Generate a new popup using popup settings if are available slots
+    /// </summary>
+    /// <param name="popup">Settings to generate the popup</param>
+    /// <returns>Return true if poup instantiated</returns>
+    public bool NewPopup(Popup popup)
+    {
+        if (popups.Count > maxPopups) { return false; }
+
+        GameObject newPopup = Instantiate(popupPrefab, popupsContainer.transform);
+        popups.Add(newPopup);
+        newPopup.GetComponent<PopupWindowController>().applySettings(popup);
+
+        return true;
     }
 
     public void UpdateIcons()
