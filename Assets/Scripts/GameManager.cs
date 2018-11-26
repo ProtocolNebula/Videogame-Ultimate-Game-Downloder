@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour {
     private void OnLevelWasLoaded(int level)
     {
         Debug.Log(level);
-        if (level == 1)
+        if (level == 2)
         {
             FindInstences();
         }
@@ -300,7 +300,7 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     #region "Alter player stats"
