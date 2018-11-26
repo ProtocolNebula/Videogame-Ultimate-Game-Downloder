@@ -2,7 +2,9 @@
 
 ## Demo
 
-Puedes probar [el juego online haciendo clic aqui](dist/)
+Puedes probar [el juego online haciendo clic aqui](http://ultimatedownloader.acecreamgames.com/)
+
+Descargar la [última versión disponible desde mega](https://mega.nz/#F!C0JxECCS!eCudhCT_Urg0X6dfZTlunQ)
 
 También puedes ver el tráiler en [youtube](https://www.youtube.com/watch?v=G4KCk2hpGOc)
 
