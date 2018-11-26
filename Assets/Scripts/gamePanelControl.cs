@@ -13,7 +13,7 @@ public class gamePanelControl : MonoBehaviour {
     [HideInInspector]
     public int price;
     [HideInInspector]
-    public Image image;
+    public Sprite image;
 
     public Text nameText;
     public Text developerText;
@@ -26,9 +26,9 @@ public class gamePanelControl : MonoBehaviour {
 	void Start () {
         nameText.text = gameName;
         developerText.text = developer;
-        priceText.text = price + "$";
+        priceText.text = price + " €";
         nameText.text = gameName;
-        imagePanel = image;
+        imagePanel.sprite = image;
 
         torrentManager tM = GameObject.Find("torrent_window").GetComponent<torrentManager>();
         downloadButton.onClick.AddListener(delegate { tM.NewTorrentPanel(gameName); });
@@ -38,5 +38,11 @@ public class gamePanelControl : MonoBehaviour {
         //downloadButton.onClick.AddListener(iM.NewGamePanel);
         //downloadButton.onClick.AddListener(delegate { iM.DeleteGamePanel(gameObject); });
         downloadButton.onClick.AddListener(delegate { iM.ReloadPanel(gameObject); });
+    }
+
+    public void FakeDownloadButton()
+    {
+        Popup popup = new Popup().Randomize();
+        GameManager.instance.NewPopup(popup);
     }
 }

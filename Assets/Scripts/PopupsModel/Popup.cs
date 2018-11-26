@@ -13,6 +13,11 @@ public class Popup {
     public bool closeable = true;
 
     /// <summary>
+    /// If is an "system error" will reproduce different sound
+    /// </summary>
+    public bool isError = false;
+
+    /// <summary>
     /// If is troll, will appear randomly on try to close (if !closeable)
     /// TODO: Refactor this to another class
     /// </summary>
@@ -100,12 +105,12 @@ public class Popup {
 
         if (isRansomware)
         {
-            GameManager.instance.incrementMoney(-moneyCost);
+            GameManager.instance.incrementMoney(-moneyCost, true);
             GameManager.instance.NoticeMe("Has pagado " + moneyCost + " € para eliminar el Ransomeware y recuperar tus archivos privados.");
         }
         else if (isTroll)
         {
-            GameManager.instance.incrementMoney(-moneyCost);
+            GameManager.instance.incrementMoney(-moneyCost, true);
             GameManager.instance.NoticeMe("Has pagado " + moneyCost + " € para eliminar el Troll Virus");
         }
 

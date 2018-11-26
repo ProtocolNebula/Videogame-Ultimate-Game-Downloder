@@ -7,7 +7,7 @@ public class VirusController {
     #region "Virus settings"
     // Rate (%) to appearing on each download
     public int minRate = 5;
-    public int maxRate = 50;
+    public int maxRate = 80;
     public int defaultRateIncrease = 5;
 
     /// <summary>
@@ -95,11 +95,11 @@ public class VirusController {
             if (antivirusCooldown <= 0)
             {
                 antivirusCooldown = 0;
+                gameManager.NoticeMe("El anti virus ha caducado.");
                 updateGameSpeed();
             }
             return true;
         }
-
         return false;
     }
 
@@ -110,6 +110,12 @@ public class VirusController {
     public void addAntivirus(float time)
     {
         antivirusCooldown += time;
+        Debug.Log("Antivirus added for " + antivirusCooldown);
+    }
+
+    public bool areAntivirusRunning()
+    {
+        return antivirusCooldown > 0;
     }
 
     /// <summary>
@@ -118,13 +124,17 @@ public class VirusController {
     /// <returns>True if virus is added</returns>
     public bool newVirus()
     {
-        int random = Random.Range(0, 100);
-        increaseRate(defaultRateIncrease);
+        int random = Random.Range(0, 100);        
 
         if (random <= currentRate)
         {
             forceNewVirus(0);
             return true;
+        }
+        else
+        {
+            // Only increase range if no virus draw
+            increaseRate(defaultRateIncrease);
         }
 
         return true;
@@ -138,9 +148,13 @@ public class VirusController {
     public void forceNewVirus(int addRate = 0)
     {
         if (addRate > 0) increaseRate(addRate);
-        if (antivirusCooldown == 0)
+        if (!areAntivirusRunning())
         {
             generateRandomVirus();
+        }
+        else
+        {
+            gameManager.NoticeMe("Virus bloqueado y eliminado.");
         }
     }
 
@@ -165,7 +179,7 @@ public class VirusController {
     /// </summary>
     private void updateGameSpeed()
     {
-        if (antivirusCooldown > 0)
+        if (areAntivirusRunning())
         {
             // Anti virus working
             gameManager.GameSpeed = GameManager.OriginalGameSpeed;
@@ -191,11 +205,12 @@ public class VirusController {
     {
         totalVirus++;
         int virus = Random.Range(0, 5) + 1;
-        virus = 5;
+
         switch (virus)
         {
             case 1: // Lag virus
-                addVirusTypeLag();
+                //addVirusTypeLag();
+                addVirusPopup();
                 break;
 
             case 2: // Paypal hack
@@ -230,9 +245,8 @@ public class VirusController {
     private void addVirusTypePaypalHack()
     {
         Debug.Log("Adding paypal hack virus");
-        float randomMoney = Random.RandomRange(30, 60);
-        float moneyRemoved = gameManager.incrementMoney(-randomMoney, true);
-        GameManager.instance.NoticeMe("Transferidos "+ randomMoney + "€ a YOUHAVEBEENHACKED correctamente.");
+        float moneyRemoved = gameManager.incrementMoney(-Random.Range(30, 60), true);
+        GameManager.instance.NoticeMe("Transferidos "+ moneyRemoved.ToString() + "€ a YOUHAVEBEENHACKED correctamente.");
     }
 
     private void addVirusPopup() {

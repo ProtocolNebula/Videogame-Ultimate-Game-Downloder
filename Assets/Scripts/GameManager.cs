@@ -13,10 +13,6 @@ public class GameManager : MonoBehaviour {
     public List<GameObject> icons;
 
     public GameObject iconPrefab;
-    public GameObject popupPrefab;
-    public GameObject popupTrollPrefab;
-    public GameObject popupRansomwarePrefab;
-    public GameObject popupsContainer;
 
     public List<GameObject> tasks;
     public List<GameObject> windows;
@@ -27,15 +23,39 @@ public class GameManager : MonoBehaviour {
     public int numTorrents;
     public const float OriginalGameSpeed = 1;
     public static float money = 10000;
+    public Text moneyContainer;
+
+    [HideInInspector]
+    public int currentGames = 0;
+    public int maxInstalledGames = 20;
+
+    // Total installed games in this play
+    [HideInInspector]
     public static int games = 0;
     public static int recordGames;
     public static float recordMoney;
-    public int maxPopups = 20;
 
     /// <summary>
     /// game speed altered by virus and antivirus
     /// </summary>
     private float gameSpeed;
+    #endregion
+
+    #region "Popups"
+    public GameObject popupPrefab;
+    public GameObject popupTrollPrefab;
+    public GameObject popupRansomwarePrefab;
+    public GameObject popupsContainer;
+    public Sprite popupError;
+    public int maxPopups = 20;
+    #endregion
+
+    #region "Sound effects"
+    private AudioSource audioManager;
+    public AudioClip audioClick;
+    public AudioClip audioNotification;
+    public AudioClip audioError;
+    public AudioClip audioPopup;
     #endregion
 
     public GameObject notificationPanel;
@@ -52,6 +72,8 @@ public class GameManager : MonoBehaviour {
         virusController = new VirusController(this);
         popups = new List<GameObject>(maxPopups);
         gameSpeed = OriginalGameSpeed;
+
+        audioManager = gameObject.AddComponent<AudioSource>();
     }
 
     //Awake is always called before any Start functions
@@ -66,11 +88,36 @@ public class GameManager : MonoBehaviour {
     //Update is called every frame.
     void Update()
     {
+        // On any click, reproduce click sound
+        if (Input.GetButtonDown("Fire1"))
+        {
+            audioManager.PlayOneShot(audioClick, 1.0f);
+        }
     }
 
     private void FixedUpdate()
     {
         virusController.FixedUpdate();
+    }
+
+    /// <summary>
+    /// Purchase antivirus (even if player have no money)
+    /// If antivirus is already in computer, user can't purcahse it
+    /// </summary>
+    /// <param name="price">Antivirus cost</param>
+    /// <param name="time">Duration time</param>
+    /// <returns></returns>
+    public void BuyAntivirus(float price, float time)
+    {
+        if (!virusController.areAntivirusRunning())
+        {
+            incrementMoney(-price, true);
+            virusController.addAntivirus(time);
+            NoticeMe("Antivirus: " + time + " segundos por " + price + " €");
+            return;
+        }
+
+        NoticeMe("Ya hay un antivirus activo.");
     }
 
     /// <summary>
@@ -125,7 +172,7 @@ public class GameManager : MonoBehaviour {
             Animator window = element.GetComponent<Animator>();
             window.SetBool("isOpen", !window.GetBool("isOpen"));
 
-            // Close task in tasks bar
+            // Close task in tasks barg
             GameObject elementTask = tasks[id];
             elementTask.SetActive(false);
         }
@@ -150,6 +197,15 @@ public class GameManager : MonoBehaviour {
         popups.Add(newPopup);
         newPopup.GetComponent<PopupWindowController>().applySettings(popup, newPopup);
 
+        if (popup.isError)
+        {
+            audioManager.PlayOneShot(audioError, 1.0f);
+        }
+        else
+        {
+            audioManager.PlayOneShot(audioPopup, 1.0f);
+        }
+
         return true;
     }
 
@@ -165,6 +221,7 @@ public class GameManager : MonoBehaviour {
 
     public void NoticeMe(string notice)
     {
+        audioManager.PlayOneShot(audioNotification, 1.0f);
         notificationPanel.GetComponent<Animator>().SetBool("isOpen", true);
         notificationPanel.transform.GetChild(0).GetComponent<Text>().text = notice;
     }
@@ -235,19 +292,35 @@ public class GameManager : MonoBehaviour {
             money += quantity;
         }
 
-
+        updateMoneyText();
         Debug.Log("Money updated | Modifier: " + quantity + " | New amount: " + money);
         return quantity;
+    }
+
+    public void updateMoneyText()
+    {
+        moneyContainer.text = money.ToString() + " €";
     }
 
     public void incrementGames(int quantity)
     {
         games += quantity;
+        currentGames += quantity;
         gamesText.text = "x " + games;
     }
 
     public bool checkFreeSpace()
     {
+        if (currentGames >= maxInstalledGames)
+        {
+            Popup popup = new Popup();
+            popup.imageRef = popupError;
+            popup.posX = 950;
+            popup.posY = - 450;
+            popup.isError = true;
+            NewPopup(popup);
+            return false;
+        }
         return true;
     }
 
