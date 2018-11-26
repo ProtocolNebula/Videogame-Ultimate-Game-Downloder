@@ -8,7 +8,7 @@ public class VirusController {
     // Rate (%) to appearing on each download
     public int minRate = 5;
     public int maxRate = 80;
-    public int defaultRateIncrease = 5;
+    public int defaultRateIncrease = 10;
 
     /// <summary>
     /// Minimum game speed (x0.) to decrease speed
@@ -203,8 +203,12 @@ public class VirusController {
     /// </summary>
     private void generateRandomVirus()
     {
+        const int totalVirusTypes = 5;
+        // With this we pretend to increment possibilities to show virus type 1 and 5
+        const int totalVirusTypesRandom = totalVirusTypes * 3;
         totalVirus++;
-        int virus = Random.Range(0, 5) + 1;
+        int virus = (Random.Range(0, totalVirusTypesRandom) % totalVirusTypes) + 1;
+        Debug.Log("Loading virus " + virus);
 
         switch (virus)
         {
