@@ -35,6 +35,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+!dist
 
 # Crashlytics generated file
 Assets/StreamingAssets/crashlytics-build.properties
