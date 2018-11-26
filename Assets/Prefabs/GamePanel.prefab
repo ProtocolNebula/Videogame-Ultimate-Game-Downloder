@@ -405,18 +405,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114584063681900350}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114714928638074382}
-        m_MethodName: FakeDownloadButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114351082325230042
@@ -610,7 +599,10 @@ MonoBehaviour:
   developerText: {fileID: 114120841099923500}
   priceText: {fileID: 114603341438566354}
   imagePanel: {fileID: 114891656757255454}
-  downloadButton: {fileID: 114519500780864210}
+  downloadButtons:
+  - {fileID: 114519500780864210}
+  - {fileID: 114855730774198854}
+  - {fileID: 114312562126734984}
 --- !u!114 &114855730774198854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -649,18 +641,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114351082325230042}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114714928638074382}
-        m_MethodName: FakeDownloadButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114891656757255454

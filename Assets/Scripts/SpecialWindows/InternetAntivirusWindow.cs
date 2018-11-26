@@ -6,8 +6,8 @@ using UnityEngine;
 public class InternetAntivirusWindow : MonoBehaviour {
 
     public int test = 0;
-    private List<float> prices = new List<float> { 50, 90, 130 };
-    private List<int> times = new List<int> { 20, 50, 110 };
+    private List<float> prices = new List<float> { 100, 200, 300 };
+    private List<int> times = new List<int> { 20, 30, 40 };
 
     // Use this for initialization
     void Start () {

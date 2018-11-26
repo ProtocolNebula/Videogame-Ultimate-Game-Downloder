@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
     public int numTorrents;
     public const float OriginalGameSpeed = 1;
     public static float money = 10000;
+    [HideInInspector]
     public Text moneyContainer;
 
     [HideInInspector]
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour {
     public GameObject popupPrefab;
     public GameObject popupTrollPrefab;
     public GameObject popupRansomwarePrefab;
+    [HideInInspector]
     public GameObject popupsContainer;
     public Sprite popupError;
     public int maxPopups = 20;
@@ -58,7 +60,9 @@ public class GameManager : MonoBehaviour {
     public AudioClip audioPopup;
     #endregion
 
+    [HideInInspector]
     public GameObject notificationPanel;
+    [HideInInspector]
     public Text gamesText;
 
     /// <summary>
@@ -67,8 +71,19 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public List<bool> tasksHaveWindow;
 
+    private void OnLevelWasLoaded(int level)
+    {
+        Debug.Log(level);
+        if (level == 1)
+        {
+            FindInstences();
+        }
+    }
+
     private void Start()
     {
+        //FindInstences();
+
         virusController = new VirusController(this);
         popups = new List<GameObject>(maxPopups);
         gameSpeed = OriginalGameSpeed;
@@ -152,7 +167,24 @@ public class GameManager : MonoBehaviour {
         if (element.activeSelf)
         {
             Animator window = element.GetComponent<Animator>();
-            window.SetBool("isOpen", !window.GetBool("isOpen"));
+
+            if (window.GetBool("isOpen"))
+            {
+                if (element.transform.GetSiblingIndex() == 1)
+                {
+                    window.SetBool("isOpen", !window.GetBool("isOpen"));
+                    //element.transform.SetSiblingIndex(0);
+                }
+                else
+                {
+                    element.transform.SetSiblingIndex(1);
+                }
+            }
+            else
+            {
+                window.SetBool("isOpen", !window.GetBool("isOpen"));
+                element.transform.SetSiblingIndex(1);
+            }
         }
     }
 
@@ -238,6 +270,32 @@ public class GameManager : MonoBehaviour {
         {
             icons[i].GetComponent<Image>().color = new Color(0, 0, 0, 0);
         }
+    }
+
+    public void FindInstences()
+    {
+        GameObject icon_shortcuts = GameObject.Find("icon_shortcuts");
+        for (int i = 0; i < icon_shortcuts.transform.childCount; i++)
+        {
+            icons.Add(icon_shortcuts.transform.GetChild(i).gameObject);
+        }
+
+        GameObject task_bar = GameObject.Find("task_bar");
+        for (int i = 0; i < task_bar.transform.childCount; i++)
+        {
+            tasks.Add(task_bar.transform.GetChild(i).gameObject);
+        }
+
+        GameObject Windows = GameObject.Find("Windows");
+        for (int i = 0; i < Windows.transform.childCount - 1; i++)
+        {
+            windows.Add(Windows.transform.GetChild(i).gameObject);
+        }
+
+        moneyContainer = GameObject.Find("money_text").GetComponent<Text>();
+        popupsContainer = GameObject.Find("popups_container");
+        notificationPanel = GameObject.Find("notification_panel");
+        gamesText = GameObject.Find("gamesCount_text").GetComponent<Text>();
     }
 
     public void EndGame()

@@ -14,12 +14,14 @@ public class gamePanelControl : MonoBehaviour {
     public int price;
     [HideInInspector]
     public Sprite image;
+    [HideInInspector]
+    public int imageId;
 
     public Text nameText;
     public Text developerText;
     public Text priceText;
     public Image imagePanel;
-    public Button downloadButton;
+    public List<Button> downloadButtons;
     
 
 	// Use this for initialization
@@ -30,14 +32,30 @@ public class gamePanelControl : MonoBehaviour {
         nameText.text = gameName;
         imagePanel.sprite = image;
 
-        torrentManager tM = GameObject.Find("torrent_window").GetComponent<torrentManager>();
-        downloadButton.onClick.AddListener(delegate { tM.NewTorrentPanel(gameName); });
-        
-        internetManager iM = GameObject.Find("Internet_window").GetComponent<internetManager>();
+        int randomNumber = Random.Range(0, 3);
 
-        //downloadButton.onClick.AddListener(iM.NewGamePanel);
-        //downloadButton.onClick.AddListener(delegate { iM.DeleteGamePanel(gameObject); });
-        downloadButton.onClick.AddListener(delegate { iM.ReloadPanel(gameObject); });
+        for (int i = 0; i < downloadButtons.Count; i++)
+        {
+            if(i == randomNumber)
+            {
+                string concat = gameName + " " + imageId;
+
+                torrentManager tM = GameObject.Find("torrent_window").GetComponent<torrentManager>();
+                downloadButtons[i].onClick.AddListener(delegate { tM.NewTorrentPanel(concat); });
+
+                internetManager iM = GameObject.Find("Internet_window").GetComponent<internetManager>();
+                downloadButtons[i].onClick.AddListener(delegate { iM.ReloadPanel(gameObject); });
+
+                //downloadButton.onClick.AddListener(iM.NewGamePanel);
+                //downloadButton.onClick.AddListener(delegate { iM.DeleteGamePanel(gameObject); });
+            }
+            else
+            {
+                downloadButtons[i].onClick.AddListener(FakeDownloadButton);
+            }
+        }
+        
+
     }
 
     public void FakeDownloadButton()

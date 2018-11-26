@@ -360,11 +360,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalTime: 20
   gameName: 
+  imageId: 0
   nameText: {fileID: 114943657306215780}
   progressText: {fileID: 114464288216262818}
   progressBar: {fileID: 114755050324759866}
   installButton: {fileID: 114793637589658116}
   iconPrefab: {fileID: 1950922235329072, guid: 1da69c757307c0140b15debe7dae88db, type: 2}
+  images:
+  - {fileID: 21300000, guid: 49fab39f96b250b45afcc02a13ed2c37, type: 3}
+  - {fileID: 21300000, guid: bfd8cbc7f9c608c4c86c5c90b190b073, type: 3}
+  - {fileID: 21300000, guid: d0485d8631cdfe34fb206b16aaea2614, type: 3}
+  - {fileID: 21300000, guid: 63bf93aca9054354e9850c7f116c693b, type: 3}
+  - {fileID: 21300000, guid: 3887b38f0a31010428a5b765af8c94b4, type: 3}
+  - {fileID: 21300000, guid: 08aa858fce122684a8fe3b0a806e7139, type: 3}
 --- !u!114 &114943657306215780
 MonoBehaviour:
   m_ObjectHideFlags: 1

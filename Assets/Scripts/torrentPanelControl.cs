@@ -11,12 +11,16 @@ public class torrentPanelControl : MonoBehaviour
 
     [HideInInspector]
     public string gameName;
+    [HideInInspector]
+    public int imageId;
 
     public Text nameText;
     public Text progressText;
     public Image progressBar;
     public Button installButton;
     public GameObject iconPrefab;
+
+    public List<Sprite> images;
 
     // Use this for initialization
     void Start()
@@ -46,6 +50,7 @@ public class torrentPanelControl : MonoBehaviour
         if (GameManager.instance.checkFreeSpace())
         {
             GameObject newIcon = Instantiate(iconPrefab, desktop.transform);
+            newIcon.GetComponent<Image>().sprite = images[imageId];
             newIcon.transform.GetChild(0).GetComponent<Text>().text = gameName;
 
             GameManager.instance.NoticeMe("Se ha instalado el juego correctamente");

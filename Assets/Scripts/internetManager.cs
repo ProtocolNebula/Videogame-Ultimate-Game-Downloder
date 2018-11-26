@@ -41,6 +41,7 @@ public class internetManager : MonoBehaviour
         newGamePanel.GetComponent<gamePanelControl>().developer = developerNames[Random.Range(0, developerNames.Count - 1)];
         newGamePanel.GetComponent<gamePanelControl>().price = Random.Range(3, 50);
         newGamePanel.GetComponent<gamePanelControl>().image = gameImages[gameID];
+        newGamePanel.GetComponent<gamePanelControl>().imageId = gameID;
     }
 
     public void DeleteGamePanel(GameObject panel)
